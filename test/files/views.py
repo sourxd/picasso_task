@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from files.models import File
-from files.forms import FileForm
 from files.serializers import FilesSerializer
 from files.tasks import start_processing
 
@@ -44,28 +43,3 @@ class UploadView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
-
-
-# ------------------- visual ------------------
-def files_view(request):
-    file_list = File.objects.all()
-    context = {
-        'title': 'Список файлов',
-        'list': file_list,
-    }
-    return render(request, os.path.join('files', 'list.html'), context)
-
-
-def upload_view(request):
-    if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    else:
-        form = FileForm()
-    context = {
-        'title': 'Загрузка файла',
-        'form': form,
-    }
-    return render(request, os.path.join('files', 'up_form.html'), context)
