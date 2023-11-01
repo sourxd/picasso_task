@@ -4,6 +4,7 @@ import time
 
 @shared_task
 def start_processing(obj):
+    """ Processing task """
     from files.models import File
     current_file = File.objects.get(id=obj['id'])
     extension = obj['file'].split('.')[-1].lower()

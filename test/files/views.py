@@ -16,6 +16,7 @@ from files.tasks import start_processing
 
 
 class FilesView(APIView):
+    """ List files """
     def get(self, request):
         queryset = File.objects.all()
         serializer = FilesSerializer(
@@ -26,6 +27,7 @@ class FilesView(APIView):
 
 
 class UploadView(APIView):
+    """ Upload page """
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = FilesSerializer
 
@@ -33,7 +35,7 @@ class UploadView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            start_processing.delay(serializer.data)
+            start_processing.delay(serializer.data)  # start task
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
