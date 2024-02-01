@@ -1,9 +1,20 @@
-# Picasso test task
+### Тестовое задание для Picasso
 Первый запуск:
-## 1. docker-compose build
-## 2. python test/manage.py makemigrations
-## 3. python test/manage.py migrate
-## 4. docker-compose up
+### 1. docker-compose build
+### 2. python test/manage.py makemigrations
+### 3. python test/manage.py migrate
+### 4. docker-compose up
 Последующие запуски:
-## 1. docker-compose up
+### 1. docker-compose up
 
+
+API эндпоинт upload/, принимает POST-запросы для загрузки файлов.
+При загрузке файла необходимо создает объект модели File,
+сохраняет файл на сервере и запускает асинхронную задачу для обработки файла с использованием Celery.
+В ответ на успешную загрузку файла возвращает статус 201.
+
+
+API эндпоинт files/, возвращает список всех файлов с их данными
+
+
+на 5555 порту находится Celery Flower для отслеживания задач по обработке
