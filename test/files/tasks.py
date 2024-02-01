@@ -12,6 +12,8 @@ def start_processing(obj):
     if extension in ('jpg', 'jpeg', 'png', 'bmp'):
         time.sleep(20)  # simulation of processing
     elif extension in ('pdf', 'doc', 'docx', 'txt', 'rtf'):
-        time.sleep(10)  # simulation of processing
+        time.sleep(18)  # simulation of processing
+    else:
+        time.sleep(15)
     current_file.processed = True
     current_file.save()
